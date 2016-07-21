@@ -2,8 +2,6 @@
 # collaborative filtering learning algorithm
 #
 
-setwd("/home/ghislandry/Enseignements/Kaggle")
-
 library(multcomp)
 
 
