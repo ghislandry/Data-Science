@@ -1,0 +1,42 @@
+---
+title: 'Search Engine Marketing keywords performance analysis: a use case'
+author: "Ghislain Landry"
+date: "8 August 2016"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Motivation
+
+Search Engine Marketing (SEM) is widely used by online businesses such as e-commerce companies to target customers based of their search history. As a rule, receiving an email advert, a Facebook ad display or more generally an advert of something close enough to (if not exactly) what you want to buy doesn't happen by mistake. There is a high probability that you are receiving those adverts because you used related terms in a search query earlier. Alternatively, someone might have searched related terms using your computer. One can also also argue that it is just a coincidence.
+
+Unfortunately, not all keywords are relevant profit-wise. i.e., not all SEM keywords are likely to generate profit. So, it is important to identify keywords that are generating profit and concentrate your investment on them. In this document, we analyse performance of SEM keywords, using real life data from an e-commerce web site. 
+
+```{r }
+data <- read.csv("SearchEngineMarketing.csv", header = T, sep = "\t", stringsAsFactors = F)
+
+FormatColumnsNames <- function(x){
+  #
+  # Write x a more R-friendly way
+  #
+  y = tolower(x)
+  y = gsub("\\.\\.$", ".pct", y)
+  gsub("\\.\\.", ".", y)
+}
+
+column.names = rapply(lapply(names(data), FormatColumnsNames), function(var) {var})
+
+names(data) = column.names
+```
+
+The following gives a quick overview of what our dataset looks like. It can be seen that we need some preprocessing. For example, the sem.keyword column seems to contain an extra piece of information. This provides further information on how specific the search was. 
+
+```{r}
+head(data)
+```
+
+## Preprocessing
+
